@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Exit Parking</title>
+    <script src="https://cdn.jsdelivr.net/npm/qrcode/build/qrcode.min.js"></script>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+        }
+        .upload-section {
+            margin-top: 20px;
+        }
+        .confirm-btn {
+            margin-top: 20px;
+            padding: 10px 20px;
+            font-size: 16px;
+            background-color: blue;
+            color: white;
+            border: none;
+            cursor: pointer;
+            border-radius: 5px;
+        }
+        .confirm-btn:disabled {
+            background-color: gray;
+            cursor: not-allowed;
+        }
+        .receipt-info {
+            margin-top: 20px;
+            padding: 20px;
+            background-color: #f9f9f9;
+            border: 1px solid #ddd;
+            border-radius: 10px;
+            display: none;
+        }
+    </style>
+</head>
+<body>
+    <h2>Exit Parking</h2>
+    <div class="upload-section">
+        <p>Upload your receipt QR code:</p>
+        <input type="file" id="qrUpload" accept="image/*">
+        <button class="confirm-btn" id="confirmExitBtn" onclick="processExit()" disabled>Confirm Exit</button>
+    </div>
+    <div class="receipt-info" id="receiptInfo">
+        <h3>Exit Details</h3>
+        <p>Entry Time: <span id="entry-time"></span></p>
+        <p>Exit Time: <span id="exit-time"></span></p>
+        <p>Total Duration: <span id="duration"></span></p>
+        <p>Amount Due: rs<span id="amount"></span></p>
+    </div>
+    <script>
+        document.getElementById('qrUpload').addEventListener('change', function() {
+            document.getElementById('confirmExitBtn').disabled = false;
+        });
+
+        function processExit() {
+            const exitTime = new Date();
+            // Dummy Data for Entry (Should be extracted from QR code)
+            const entryTime = new Date(); // Replace with actual entry time from QR scan
+            entryTime.setHours(entryTime.getHours() - 2); // Simulated 2-hour parking duration
+
+            // Calculate duration and fee
+            const durationMs = exitTime - entryTime;
+            const durationHours = Math.ceil(durationMs / (1000 * 60 * 60));
+            const fee = durationHours * 20; // Assuming $5 per hour
+
+            document.getElementById('entry-time').innerText = entryTime.toLocaleString();
+            document.getElementById('exit-time').innerText = exitTime.toLocaleString();
+            document.getElementById('duration').innerText = durationHours + ' hour(s)';
+            document.getElementById('amount').innerText = fee;
+            document.getElementById('receiptInfo').style.display = 'block';
+            
+
+            alert(' Payment Due: rs' + fee);
+            
+        }
+    </script>
+    <a href="exit.html">
+        <br><br><br><button>  proceed your payment </button>
+    </a>
+    
+</body>
+
+</html>

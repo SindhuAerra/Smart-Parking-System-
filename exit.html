@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>QR Code Scanner & Payment</title>
+    <script src="https://unpkg.com/html5-qrcode"></script>
+    <script>
+        function onScanSuccess(decodedText) {
+            let currentTime = new Date();
+            document.getElementById("allocatedTime").innerText = currentTime.toLocaleString();
+            document.getElementById("amount").innerText = '₹' + (50).toFixed(2);
+        }
+    </script>
+    <style>
+        body { font-family: Arial, sans-serif; text-align: center; padding: 20px; }
+        #qr-reader { width: 300px; margin: auto; }
+        .info { margin-top: 20px; font-size: 18px; }
+        .upi-img { width: 200px; margin-top: 20px; }
+    </style>
+</head>
+<body>
+    <h2>Scan QR Code</h2>
+    <div id="qr-reader"></div>
+    <div class="info">
+        <p>Allocated Time: <span id="allocatedTime">2</span></p>
+        <p>Amount for 1 Hour: <span id="amount">₹20</span></p>
+        <p>total amount : <span id="amount">₹40</span></p>
+        
+    </div>
+    <h3>Pay via UPI</h3>
+    <img src="qrr.jpg" alt="UPI QR Code" class="upi-img">
+    
+    <script>
+        let qrScanner = new Html5Qrcode("qr-reader");
+        qrScanner.start({ facingMode: "environment" }, {}, onScanSuccess);
+    </script>
+    <br>
+    <br>
+    <br>
+    <a href="pay.html">
+        <button> Pay </button>
+    </a>
+</body>
+</html>

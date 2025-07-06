@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Upload the Scanner</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            margin-top: 50px;
+            
+        
+    background-image: url('download(2).jpeg'); /* Added background image */
+    background-size: cover; /* Ensures the image covers the entire page */
+    background-position: center; /* Centers the image */
+    background-repeat: no-repeat; /* Prevents tiling */
+    height: 100vh; /* Ensures full viewport height */
+    margin: 0; /* Removes default margins */
+    display: flex;
+    flex-direction: column;
+    justify-content: center; /* Centers content vertically */
+    align-items: center; /* Centers content horizontally */
+}
+  
+        
+        .container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 10px;
+        }
+        .upload-btn {
+            padding: 10px 20px;
+            font-size: 16px;
+            background-color: blue;
+            color: white;
+            border: none;
+            cursor: pointer;
+            border-radius: 5px;
+        }
+        .upload-btn:hover {
+            background-color: darkblue;
+        }
+    </style>
+</head>
+<body>
+    <h2>Upload the Scanner</h2>
+    <div class="container">
+        <input type="file" id="fileInput">
+        <button class="upload-btn" onclick="navigateToNextPage()">Upload</button>
+    </div>
+
+    <script>
+        function navigateToNextPage() {
+            window.location.href = 'scan.html'; // Change 'nextpage.html' to your actual destination page
+        }
+    </script>
+</body>
+</html>

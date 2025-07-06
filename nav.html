@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Parking Slot Navigation</title>
+    <style>
+        /* Add background image */
+        body { 
+    background-image: url('navigation vnr.jpg'); /* Added background image */
+    background-size: cover; /* Ensures the image covers the entire page */
+    background-position: center; /* Centers the image */
+    background-repeat: no-repeat; /* Prevents tiling */
+    height: 100vh; /* Ensures full viewport height */
+    margin: 0; /* Removes default margins */
+    display: flex;
+    flex-direction: column;
+    justify-content: center; /* Centers content vertically */
+    align-items: center; /* Centers content horizontally */
+}
+        h2 {
+            color: white; /* Change heading color to white */
+        }
+        #map {
+            width: 100%;
+            height: 400px;
+            background-color: rgba(221, 221, 221, 0.8); /* Semi-transparent background */
+            margin-top: 20px;
+        }
+        button {
+            padding: 10px 20px;
+            font-size: 16px;
+            margin: 10px;
+            border: none;
+            cursor: pointer;
+            border-radius: 5px;
+            color: white;
+            background-color: #007bff; /* Blue color for buttons */
+        }
+        button:hover {
+            background-color: #0056b3; /* Darker blue on hover */
+        }
+    </style>
+</head>
+<body>
+    <h2>Navigation to Parking Slot</h2>
+    <p id="slot-info"></p>
+    <button onclick="redirectToGoogleMaps()">Open in Google Maps</button>
+    <button onclick="goBack()">Back</button>
+    <a href="ex.html"><button>Exit the Slot</button></a>
+
+    <script>
+        // Function to get query parameter
+        function getQueryParam(param) {
+            const urlParams = new URLSearchParams(window.location.search);
+            return urlParams.get(param);
+        }
+
+        // Function to redirect to Google Maps
+        function redirectToGoogleMaps() {
+            const slot = getQueryParam("slot");
+            const coordinates = {
+                "1": "37.7749,-122.4194", // Slot 1
+                "2": "37.7750,-122.4195", // Slot 2
+                "3": "37.7751,-122.4196", // Slot 3
+                "4": "37.7752,-122.4197", // Slot 4
+                "5": "37.7753,-122.4198", // Slot 5
+                "6": "37.7754,-122.4199", // Slot 6
+                "7": "37.7755,-122.4200", // Slot 7
+                "8": "37.7756,-122.4201", // Slot 8
+                "9": "37.7757,-122.4202", // Slot 9
+                "10": "37.7758,-122.4203" // Slot 10
+            };
+
+            if (coordinates[slot]) {
+                // Redirect to Google Maps with the slot's coordinates
+                window.location.href = `https://www.google.com/maps?q=${coordinates[slot]}`;
+            } else {
+                alert("Location not available for this slot.");
+            }
+        }
+
+        // Function to go back to the previous page
+        function goBack() {
+            window.history.back();
+        }
+
+        // Display the selected slot on page load
+        window.onload = function () {
+            const slot = getQueryParam("slot");
+            if (slot) {
+                document.getElementById("slot-info").innerText = `You are navigating to Slot: ${slot}`;
+            } else {
+                document.getElementById("slot-info").innerText = "No slot selected.";
+            }
+        };
+    </script>
+</body>
+</html>
